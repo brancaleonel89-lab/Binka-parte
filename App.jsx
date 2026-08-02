@@ -15,7 +15,7 @@ const NAV_ITEMS = [
   { id: "tiempos", label: "Tiempos", icon: Clock },
 ];
 
-const TURNOS = ["Mañana", "Tarde"];
+const TURNOS = ["Mañana", "Tarde", "N/A"];
 
 const PUESTOS = [
   "Operario de producción",
@@ -34,6 +34,7 @@ const CATEGORIAS = [
   "Calificado especializado",
   "Planta química",
   "Título habilitante",
+  "Fuera de convenio",
 ];
 
 const LINEAS = ["Domisanitarios", "Ectoparasiticidas"];
