@@ -2982,7 +2982,7 @@ const isAdmin = authState.role === "jefe";
           </button>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
-          {NAV_ITEMS.map((item) => {
+          {NAV_ITEMS.filter(item => isAdmin || !["empleados","productos","tiempos"].includes(item.id)).map((item) => {
             const Icon = item.icon;
             const active = activeTab === item.id;
             return (
@@ -2998,9 +2998,13 @@ const isAdmin = authState.role === "jefe";
             );
           })}
         </nav>
-        <div className="px-5 py-4 text-[11px] text-slate-400 border-t border-blue-800">
-          Datos compartidos entre supervisores
-        </div>
+<div className="px-5 py-4 border-t border-blue-800 space-y-2">
+  <p className="text-[11px] text-blue-300">{authState.user.email}</p>
+  <button onClick={() => window.supabaseClient.auth.signOut()}
+    className="flex items-center gap-2 text-xs text-slate-400 hover:text-rose-400 transition-colors">
+    <LogOut size={14} /> Cerrar sesión
+  </button>
+</div>
       </aside>
 
       <div className="flex-1 flex flex-col min-h-screen min-w-0">
