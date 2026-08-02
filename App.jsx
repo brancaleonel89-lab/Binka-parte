@@ -7,7 +7,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from "recharts";
 
-const NAV_ITEMS = [
+{NAV_ITEMS.filter(item => isAdmin || !["empleados","productos","tiempos"].includes(item.id)).map((item) => {
   { id: "inicio", label: "Inicio", icon: Home },
   { id: "parte", label: "Parte diario", icon: ClipboardList },
   { id: "empleados", label: "Empleados", icon: Users },
