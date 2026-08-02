@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import {
   Menu, X, Home, ClipboardList, Users, Package, Clock, Plus, Search,
-  Pencil, Trash2, Building2, Loader2, AlertCircle, ChevronDown,
+  Pencil, Trash2, Building2, Loader2, AlertCircle, ChevronDown, LogOut,
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
