@@ -956,7 +956,7 @@ function CategoriaChart({ empleados }) {
   );
 }
 
-function EmpleadosView({ empleados, onSave }) {
+function EmpleadosView({ empleados, onSave, isAdmin = true }) {
   const [query, setQuery] = useState("");
   const [puestoFilter, setPuestoFilter] = useState("");
   const [categoriaFilter, setCategoriaFilter] = useState("");
@@ -1022,15 +1022,17 @@ function EmpleadosView({ empleados, onSave }) {
             <span className="text-slate-400">en total</span>
           </p>
         </div>
-        <button
-          onClick={() => {
-            setFormTarget(null);
-            setShowForm(true);
-          }}
-          className="flex items-center gap-1.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm px-4 py-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300"
-        >
-          <Plus size={16} /> Nuevo empleado
-        </button>
+        {isAdmin && (
+          <button
+            onClick={() => {
+              setFormTarget(null);
+              setShowForm(true);
+            }}
+            className="flex items-center gap-1.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm px-4 py-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300"
+          >
+            <Plus size={16} /> Nuevo empleado
+          </button>
+        )}
       </div>
 
       <CategoriaChart empleados={empleados} />
@@ -1106,24 +1108,26 @@ function EmpleadosView({ empleados, onSave }) {
                     </td>
                     <td className="py-3 px-4 text-slate-600">{emp.turno || "—"}</td>
                     <td className="py-3 px-4"><StatusDot active={emp.activo} /></td>
-                    <td className="py-3 px-4 text-right">
-                      <div className="flex justify-end gap-1">
-                        <button
-                          onClick={() => { setFormTarget(emp); setShowForm(true); }}
-                          className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
-                          aria-label="Editar"
-                        >
-                          <Pencil size={15} />
-                        </button>
-                        <button
-                          onClick={() => setDeleteTarget(emp)}
-                          className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded"
-                          aria-label="Eliminar"
-                        >
-                          <Trash2 size={15} />
-                        </button>
-                      </div>
-                    </td>
+                    {isAdmin && (
+                      <td className="py-3 px-4 text-right">
+                        <div className="flex justify-end gap-1">
+                          <button
+                            onClick={() => { setFormTarget(emp); setShowForm(true); }}
+                            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
+                            aria-label="Editar"
+                          >
+                            <Pencil size={15} />
+                          </button>
+                          <button
+                            onClick={() => setDeleteTarget(emp)}
+                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded"
+                            aria-label="Eliminar"
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        </div>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -1138,22 +1142,24 @@ function EmpleadosView({ empleados, onSave }) {
                     <p className="font-semibold text-slate-800">{emp.nombre}</p>
                     <StatusDot active={emp.activo} />
                   </div>
-                  <div className="flex gap-1">
-                    <button
-                      onClick={() => { setFormTarget(emp); setShowForm(true); }}
-                      className="p-1.5 text-slate-400 hover:text-slate-700"
-                      aria-label="Editar"
-                    >
-                      <Pencil size={16} />
-                    </button>
-                    <button
-                      onClick={() => setDeleteTarget(emp)}
-                      className="p-1.5 text-slate-400 hover:text-rose-600"
-                      aria-label="Eliminar"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
+                  {isAdmin && (
+                    <div className="flex gap-1">
+                      <button
+                        onClick={() => { setFormTarget(emp); setShowForm(true); }}
+                        className="p-1.5 text-slate-400 hover:text-slate-700"
+                        aria-label="Editar"
+                      >
+                        <Pencil size={16} />
+                      </button>
+                      <button
+                        onClick={() => setDeleteTarget(emp)}
+                        className="p-1.5 text-slate-400 hover:text-rose-600"
+                        aria-label="Eliminar"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="mb-2">
                   <Tag>{categoriaActualDe(emp) || "Sin categoría"}</Tag>
@@ -1531,7 +1537,7 @@ function ConfirmDialogProducto({ producto, onConfirm, onCancel }) {
   );
 }
 
-function ProductosView({ productos, onSave }) {
+function ProductosView({ productos, onSave, isAdmin = true }) {
   const [query, setQuery] = useState("");
   const [lineaFilter, setLineaFilter] = useState("");
   const [empresaFilter, setEmpresaFilter] = useState("");
@@ -1597,12 +1603,14 @@ function ProductosView({ productos, onSave }) {
             <span className="text-slate-400">en total</span>
           </p>
         </div>
-        <button
-          onClick={() => { setFormTarget(null); setShowForm(true); }}
-          className="flex items-center gap-1.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm px-4 py-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300"
-        >
-          <Plus size={16} /> Nuevo producto
-        </button>
+        {isAdmin && (
+          <button
+            onClick={() => { setFormTarget(null); setShowForm(true); }}
+            className="flex items-center gap-1.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm px-4 py-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300"
+          >
+            <Plus size={16} /> Nuevo producto
+          </button>
+        )}
       </div>
 
       <div className="flex flex-wrap gap-3 mb-5">
@@ -1669,24 +1677,26 @@ function ProductosView({ productos, onSave }) {
                     <td className="py-3 px-4 text-slate-600">{p.empresa}</td>
                     <td className="py-3 px-4"><Tag>{p.enteRegulador}</Tag></td>
                     <td className="py-3 px-4"><StatusDot active={p.activo} /></td>
-                    <td className="py-3 px-4 text-right">
-                      <div className="flex justify-end gap-1">
-                        <button
-                          onClick={() => { setFormTarget(p); setShowForm(true); }}
-                          className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
-                          aria-label="Editar"
-                        >
-                          <Pencil size={15} />
-                        </button>
-                        <button
-                          onClick={() => setDeleteTarget(p)}
-                          className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded"
-                          aria-label="Eliminar"
-                        >
-                          <Trash2 size={15} />
-                        </button>
-                      </div>
-                    </td>
+                    {isAdmin && (
+                      <td className="py-3 px-4 text-right">
+                        <div className="flex justify-end gap-1">
+                          <button
+                            onClick={() => { setFormTarget(p); setShowForm(true); }}
+                            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
+                            aria-label="Editar"
+                          >
+                            <Pencil size={15} />
+                          </button>
+                          <button
+                            onClick={() => setDeleteTarget(p)}
+                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded"
+                            aria-label="Eliminar"
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        </div>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -1703,22 +1713,24 @@ function ProductosView({ productos, onSave }) {
                       {p.codigo} · {p.unidadMedida}
                     </p>
                   </div>
-                  <div className="flex gap-1">
-                    <button
-                      onClick={() => { setFormTarget(p); setShowForm(true); }}
-                      className="p-1.5 text-slate-400 hover:text-slate-700"
-                      aria-label="Editar"
-                    >
-                      <Pencil size={16} />
-                    </button>
-                    <button
-                      onClick={() => setDeleteTarget(p)}
-                      className="p-1.5 text-slate-400 hover:text-rose-600"
-                      aria-label="Eliminar"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
+                  {isAdmin && (
+                    <div className="flex gap-1">
+                      <button
+                        onClick={() => { setFormTarget(p); setShowForm(true); }}
+                        className="p-1.5 text-slate-400 hover:text-slate-700"
+                        aria-label="Editar"
+                      >
+                        <Pencil size={16} />
+                      </button>
+                      <button
+                        onClick={() => setDeleteTarget(p)}
+                        className="p-1.5 text-slate-400 hover:text-rose-600"
+                        aria-label="Eliminar"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center gap-2 mb-2">
                   <Tag>{p.enteRegulador}</Tag>
@@ -2504,7 +2516,7 @@ function TiempoForm({ initial, productos, tiempos, onSubmit, onClose, saving }) 
   );
 }
 
-function TiemposView({ tiempos, productos, onSave }) {
+function TiemposView({ tiempos, productos, onSave, isAdmin = true }) {
   const [query, setQuery] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [formTarget, setFormTarget] = useState(null);
@@ -2571,12 +2583,14 @@ function TiemposView({ tiempos, productos, onSave }) {
             <span className="text-slate-400">Hs totales</span>
           </p>
         </div>
-        <button
-          onClick={() => { setFormTarget(null); setShowForm(true); }}
-          className="flex items-center gap-1.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm px-4 py-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300"
-        >
-          <Plus size={16} /> Nuevo tiempo estándar
-        </button>
+        {isAdmin && (
+          <button
+            onClick={() => { setFormTarget(null); setShowForm(true); }}
+            className="flex items-center gap-1.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm px-4 py-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300"
+          >
+            <Plus size={16} /> Nuevo tiempo estándar
+          </button>
+        )}
       </div>
 
       {/* Buscador */}
@@ -2638,22 +2652,24 @@ function TiemposView({ tiempos, productos, onSave }) {
                         <td className="py-2.5 px-4 text-slate-400 text-xs max-w-[220px] truncate">
                           {t.observaciones || <span className="text-slate-200">—</span>}
                         </td>
-                        <td className="py-2.5 px-4 text-right">
-                          <div className="flex justify-end gap-1">
-                            <button
-                              onClick={() => { setFormTarget(t); setShowForm(true); }}
-                              className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
-                            >
-                              <Pencil size={14} />
-                            </button>
-                            <button
-                              onClick={() => setDeleteTarget(t)}
-                              className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded"
-                            >
-                              <Trash2 size={14} />
-                            </button>
-                          </div>
-                        </td>
+                        {isAdmin && (
+                          <td className="py-2.5 px-4 text-right">
+                            <div className="flex justify-end gap-1">
+                              <button
+                                onClick={() => { setFormTarget(t); setShowForm(true); }}
+                                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
+                              >
+                                <Pencil size={14} />
+                              </button>
+                              <button
+                                onClick={() => setDeleteTarget(t)}
+                                className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded"
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>
@@ -2670,14 +2686,16 @@ function TiemposView({ tiempos, productos, onSave }) {
                       <span className="font-bold text-slate-800 text-sm flex-shrink-0" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                         {t.tiempoHs.toFixed(2)} Hs
                       </span>
-                      <div className="flex gap-1 flex-shrink-0">
-                        <button onClick={() => { setFormTarget(t); setShowForm(true); }} className="p-1.5 text-slate-400 hover:text-slate-700">
-                          <Pencil size={14} />
-                        </button>
-                        <button onClick={() => setDeleteTarget(t)} className="p-1.5 text-slate-400 hover:text-rose-600">
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
+                      {isAdmin && (
+                        <div className="flex gap-1 flex-shrink-0">
+                          <button onClick={() => { setFormTarget(t); setShowForm(true); }} className="p-1.5 text-slate-400 hover:text-slate-700">
+                            <Pencil size={14} />
+                          </button>
+                          <button onClick={() => setDeleteTarget(t)} className="p-1.5 text-slate-400 hover:text-rose-600">
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -2905,7 +2923,7 @@ export default function App({ isAdmin = true, userEmail = "" }) {
           </button>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
-          {NAV_ITEMS.filter(item => isAdmin || !["empleados","productos","tiempos"].includes(item.id)).map((item) => {
+          {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const active = activeTab === item.id;
             return (
@@ -2967,7 +2985,7 @@ export default function App({ isAdmin = true, userEmail = "" }) {
                 />
               )}
               {activeTab === "empleados" && (
-                <EmpleadosView empleados={empleados} onSave={persistEmpleados} />
+                <EmpleadosView empleados={empleados} onSave={persistEmpleados} isAdmin={isAdmin} />
               )}
               {activeTab === "parte" && (
                 <ParteView
@@ -2978,10 +2996,10 @@ export default function App({ isAdmin = true, userEmail = "" }) {
                 />
               )}
               {activeTab === "productos" && (
-                <ProductosView productos={productos} onSave={persistProductos} />
+                <ProductosView productos={productos} onSave={persistProductos} isAdmin={isAdmin} />
               )}
               {activeTab === "tiempos" && (
-                <TiemposView tiempos={tiempos} productos={productos} onSave={persistTiempos} />
+                <TiemposView tiempos={tiempos} productos={productos} onSave={persistTiempos} isAdmin={isAdmin} />
               )}
             </>
           )}
