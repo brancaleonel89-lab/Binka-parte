@@ -2950,6 +2950,8 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
 if (authState === null) return <div className="min-h-screen bg-slate-50 flex items-center justify-center"><Loader2 size={24} className="animate-spin text-slate-400" /></div>;
 if (authState === false) return <Login />;
 const isAdmin = authState.role === "jefe";
+      <div className="min-h-screen bg-blue-50 flex" style={{ fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif" }}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');`}</style>
 
       {sidebarOpen && (
         <div
