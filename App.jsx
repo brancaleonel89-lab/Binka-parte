@@ -2782,7 +2782,7 @@ function Login() {
     </div>
   );
 }
-export default function App() {
+export default function App({ isAdmin = true, userEmail = "" }) {
 const [authState, setAuthState] = useState(null);
 const [activeTab, setActiveTab] = useState("inicio");
 const [sidebarOpen, setSidebarOpen] = useState(false);
