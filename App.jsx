@@ -35,6 +35,8 @@ const CATEGORIAS = [
   "Planta química",
   "Título habilitante",
   "Fuera de convenio",
+  "Líder de producción",
+  "Analista de producción",
 ];
 
 const LINEAS = ["Domisanitarios", "Ectoparasiticidas"];
