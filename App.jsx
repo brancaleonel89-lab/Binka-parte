@@ -22,6 +22,8 @@ const PUESTOS = [
   "Operario de limpieza",
   "Operario de mantenimiento",
   "Supervisor de producción",
+  "Líder de producción",
+  "Analista de producción",
   "Jefe de producción",
 ];
 
@@ -35,8 +37,6 @@ const CATEGORIAS = [
   "Planta química",
   "Título habilitante",
   "Fuera de convenio",
-  "Líder de producción",
-  "Analista de producción",
 ];
 
 const LINEAS = ["Domisanitarios", "Ectoparasiticidas"];
